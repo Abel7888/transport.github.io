@@ -6,6 +6,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/style.css" />
     <title>Transformation Axis Agency</title>
+    <style>
+      /* Optional: Basic styling for the subscriber form */
+      .subscriber-form {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+      }
+      .subscriber-form h2 {
+        text-align: center;
+      }
+      .subscriber-form input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+      .subscriber-form button {
+        width: 100%;
+        padding: 10px;
+        background-color: #0073e6;
+        border: none;
+        border-radius: 3px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .subscriber-form button:hover {
+        background-color: #005bb5;
+      }
+      .subscriber-form .error-message {
+        color: red;
+        display: none;
+        margin-top: 10px;
+      }
+      .subscriber-form .success-message {
+        color: green;
+        display: none;
+        margin-top: 10px;
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -21,13 +65,13 @@
         <div class="social-bar">
           <ul>
             <li>
-              <a href="https://instagram.com">
-                <img src="images/instagram.png" target="_blank" alt="" />
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                <img src="images/instagram.png" alt="Instagram" />
               </a>
             </li>
           </ul>
           <a href="mailto:abelassefa19@email.com" class="email-icon">
-            <img src="images/email.png" alt="" />
+            <img src="images/email.png" alt="Email" />
           </a>
         </div>
       </div>
@@ -46,49 +90,49 @@
 
       <div class="portfolio">
         <div class="item">
-          <img src="images/a1.jpg" alt="" />
+          <img src="images/a1.jpg" alt="Artificial Intelligence (AI) and Machine Learning" />
           <div class="action">
             <a href="#">Artificial Intelligence (AI) and Machine Learning</a>
           </div>
         </div>
         <div class="item">
-          <img src="images/a2.jpg" alt="" />
+          <img src="images/a2.jpg" alt="Internet of Things (IoT)" />
           <div class="action">
             <a href="#">Internet of Things (IoT)</a>
           </div>
         </div>
         <div class="item">
-          <img src="images/a3.jpg" alt="" />
+          <img src="images/a3.jpg" alt="Blockchain Technology" />
           <div class="action">
             <a href="#">Blockchain Technology</a>
           </div>
         </div>
         <div class="item">
-          <img src="images/a4.jpg" alt="" />
+          <img src="images/a4.jpg" alt="Robotics and Automation" />
           <div class="action">
             <a href="#">Robotics and Automation</a>
           </div>
         </div>
         <div class="item">
-          <img src="images/a10.jpg" alt="" />
+          <img src="images/a10.jpg" alt="Augmented Reality (AR) and Virtual Reality (VR)" />
           <div class="action">
             <a href="#">Augmented Reality (AR) and Virtual Reality (VR)</a>
           </div>
         </div>
         <div class="item">
-          <img src="images/a6.jpg" alt="" />
+          <img src="images/a6.jpg" alt="3D Printing (Additive Manufacturing)" />
           <div class="action">
             <a href="#">3D Printing (Additive Manufacturing)</a>
           </div>
         </div>
         <div class="item">
-          <img src="images/a11.jpg" alt="" />
+          <img src="images/a11.jpg" alt="Drones and Unmanned Aerial Vehicles (UAVs)" />
           <div class="action">
             <a href="#">Drones and Unmanned Aerial Vehicles (UAVs)</a>
           </div>
         </div>
         <div class="item">
-          <img src="images/a8.jpg" alt="" />
+          <img src="images/a8.jpg" alt="Digital Twins" />
           <div class="action">
             <a href="#">Digital Twins</a>
           </div>
@@ -96,13 +140,61 @@
       </div>
     </section>
 
-    <!-- ConvertKit Subscriber Form -->
+    <!-- Subscriber Form Section -->
     <section>
-      <h2>Subscribe to Our Newsletter</h2>
-      <p>Stay updated with the latest insights on emerging technologies. Join our mailing list to receive news and updates.</p>
-      <script async data-uid="683f51e96a" src="https://data-shield-recruiting.ck.page/683f51e96a/index.js"></script>
+      <div class="subscriber-form">
+        <h2>Subscribe to Our Newsletter</h2>
+        <p>Stay updated with the latest insights on emerging technologies. Join our mailing list to receive news and updates.</p>
+        <form action="YOUR_CONVERTKIT_FORM_ACTION_URL" method="post" id="convertkit-form">
+          <input type="email" name="email_address" id="email_address" placeholder="Enter your email" required />
+          <button type="submit">Subscribe</button>
+          <div class="error-message" id="error-message">Please enter a valid email address.</div>
+          <div class="success-message" id="success-message">Thank you for subscribing!</div>
+        </form>
+      </div>
     </section>
 
     <script src="js/script.js"></script>
+
+    <script>
+      // Optional: JavaScript to handle form submission feedback
+      document.getElementById('convertkit-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        const emailInput = document.getElementById('email_address');
+        const errorMessage = document.getElementById('error-message');
+        const successMessage = document.getElementById('success-message');
+
+        // Simple email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(emailInput.value)) {
+          errorMessage.style.display = 'block';
+          successMessage.style.display = 'none';
+          return;
+        }
+
+        // Submit the form via AJAX
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', this.action, true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              successMessage.style.display = 'block';
+              errorMessage.style.display = 'none';
+              emailInput.value = '';
+            } else {
+              errorMessage.textContent = 'There was an error subscribing. Please try again.';
+              errorMessage.style.display = 'block';
+              successMessage.style.display = 'none';
+            }
+          }
+        };
+
+        const encodedEmail = encodeURIComponent(emailInput.value);
+        xhr.send('email_address=' + encodedEmail);
+      });
+    </script>
   </body>
 </html>
